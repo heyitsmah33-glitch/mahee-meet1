@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MAHEE Private Meet</title>
+    <script src="https://meet.jit.si/external_api.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            background: #0f0f1a;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        #loginBox {
+            margin-top: 150px;
+        }
+
+        input {
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            width: 220px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            background: #a855f7;
+            color: white;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        #meet {
+            height: 80vh;
+            width: 100%;
+            display: none;
+        }
+
+        #emojiPanel {
+            display: none;
+            padding: 10px;
+            background: #1a1a2e;
+        }
+
+        #emojiPanel button {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="loginBox">
+    <h2>Enter Password to Join 💜</h2>
+    <input type="password" id="pass" placeholder="Enter Password">
+    <br><br>
+    <button onclick="checkPass()">Join</button>
+</div>
+
+<div id="meet"></div>
+
+<div id="emojiPanel">
+    <button onclick="react('hahaha.mp3')">🤣</button>
+    <button onclick="react('awww.mp3')">🥰</button>
+    <button onclick="react('please.mp3')">🥺</button>
+    <button onclick="react('love.mp3')">😘</button>
+    <button onclick="react('koi.mp3')">😟</button>
+    <button onclick="react('muah.mp3')">😚</button>
+    <button onclick="react('dure.mp3')">😒</button>
+    <button onclick="react('chup.mp3')">🤬</button>
+    <button onclick="react('fine.mp3')">👍🏻</button>
+</div>
+
+<audio id="soundPlayer"></audio>
+
+<script>
+
+function checkPass() {
+    var password = document.getElementById("pass").value;
+
+    if(password === "Aug 1.8.2k23") {
+
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("meet").style.display = "block";
+        document.getElementById("emojiPanel").style.display = "block";
+
+        const domain = "meet.jit.si";
+
+        const options = {
+            roomName: "MaheeSaifPrivateRoom2026",
+            width: "100%",
+            height: "100%",
+            parentNode: document.querySelector('#meet'),
+            configOverwrite: {
+                startWithAudioMuted: false,
+                startWithVideoMuted: false,
+                prejoinPageEnabled: false
+            }
+        };
+
+        const api = new JitsiMeetExternalAPI(domain, options);
+
+    } else {
+        alert("Wrong Password 😒");
+    }
+}
+
+function react(soundFile) {
+    var player = document.getElementById("soundPlayer");
+    player.src = soundFile;
+    player.play();
+}
+
+</script>
+
+</body>
+</html>
